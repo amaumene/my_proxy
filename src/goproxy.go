@@ -79,7 +79,7 @@ func main() {
 
 	// Set up the HTTPS server
 	server := &http.Server{
-		Addr:      ":https",
+		Addr:      ":8443",
 		Handler:   mainRouter,
 		TLSConfig: tlsConfig,
 		ErrorLog:  log.New(os.Stderr, "HTTPS Server Error: ", log.Ldate|log.Ltime|log.Lshortfile),
@@ -93,7 +93,7 @@ func main() {
 	go func() {
 		log.Println("Starting HTTP server for ACME challenges on :80")
 		httpServer := &http.Server{
-			Addr:      ":http",
+			Addr:      ":8080",
 			Handler:   wrapHandlerWithLogging(certManager.HTTPHandler(nil)),
 			ConnState: logConnState,
 		}
