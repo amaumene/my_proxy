@@ -16,4 +16,4 @@ VOLUME /certs
 EXPOSE 8080/tcp
 EXPOSE 8443/tcp
 
-CMD [ "/app/my_torbox_webhook" ]
+CMD [ "/app/goproxy", "-config", "/config/config.txt" ]
