@@ -2,7 +2,7 @@ FROM registry.access.redhat.com/ubi9/go-toolset AS builder
 
 COPY ./src/goproxy.go ./goproxy.go
 
-RUN go mod init github.com/d0rc/goproxy && go mod tidy && go build goproxy.go
+RUN go mod init github.com/amaumene/my_proxy && go mod tidy && go build goproxy.go
 
 FROM registry.access.redhat.com/ubi9/ubi-minimal
 
