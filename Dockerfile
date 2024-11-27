@@ -1,14 +1,16 @@
-FROM registry.access.redhat.com/ubi9/go-toolset AS builder
+FROM golang AS builder
 
-COPY ./src/goproxy.go ./goproxy.go
+WORKDIR /app
 
-RUN go mod init github.com/amaumene/my_proxy && go mod tidy && go build goproxy.go
+COPY ./src/proxy.go ./proxy.go
 
-FROM registry.access.redhat.com/ubi9/ubi-minimal
+RUN go mod init github.com/amaumene/my_proxy && go mod tidy
 
-COPY --from=builder /opt/app-root/src/goproxy /app/goproxy
+RUN CGO_ENABLED=0 go build proxy.go
 
-USER 1001
+FROM gcr.io/distroless/static:nonroot
+
+COPY --chown=nonroot --from=builder /app/proxy /app/proxy
 
 VOLUME /config
 VOLUME /certs
@@ -16,4 +18,4 @@ VOLUME /certs
 EXPOSE 8080/tcp
 EXPOSE 8443/tcp
 
-CMD [ "/app/goproxy", "-config", "/config/config.txt" ]
+CMD [ "/app/proxy", "-config", "/config/config.txt" ]
