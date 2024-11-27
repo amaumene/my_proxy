@@ -79,15 +79,15 @@ func main() {
 
 	// Set up the HTTPS server
 	server := &http.Server{
-		Addr:      ":8443",
-		ReadTimeout:       1 * time.Second,
-  		WriteTimeout:      1 * time.Second,
- 		IdleTimeout:       30 * time.Second,
-   		 ReadHeaderTimeout: 2 * time.Second,
-		Handler:   mainRouter,
-		TLSConfig: tlsConfig,
-		ErrorLog:  log.New(os.Stderr, "HTTPS Server Error: ", log.Ldate|log.Ltime|log.Lshortfile),
-		ConnState: logConnState,
+		Addr:              ":8443",
+		ReadTimeout:       30 * time.Second,
+		WriteTimeout:      30 * time.Second,
+		IdleTimeout:       30 * time.Second,
+		ReadHeaderTimeout: 2 * time.Second,
+		Handler:           mainRouter,
+		TLSConfig:         tlsConfig,
+		ErrorLog:          log.New(os.Stderr, "HTTPS Server Error: ", log.Ldate|log.Ltime|log.Lshortfile),
+		ConnState:         logConnState,
 	}
 
 	// Start certificate management
