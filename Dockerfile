@@ -12,6 +12,8 @@ FROM scratch
 
 COPY --chown=65532 --from=builder /app/proxy /app/proxy
 
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+
 VOLUME /config
 VOLUME /certs
 
