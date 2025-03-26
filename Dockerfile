@@ -10,8 +10,7 @@ RUN rm -rf vendor go.mod go.sum
 
 RUN sed -ie 's/:https"/:8443"/g' src/goproxy.go
 RUN sed -ie 's/:http"/:8080"/g' src/goproxy.go
-#RUN sed -ie 's/info@d-tech.ge/plop@plop.pm/g' src/goproxy.go
-#RUN sed -ie 's/mainRouter.Use(compressionMiddleware)/\/\/mainRouter.Use(compressionMiddleware)/g' src/goproxy.go
+RUN sed -ie 's/mainRouter.Use(compressionMiddleware)/\/\/mainRouter.Use(compressionMiddleware)/g' src/goproxy.go
 
 RUN go mod init github.com/d0rc/goproxy && go mod tidy
 
