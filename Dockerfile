@@ -14,7 +14,7 @@ RUN sed -ie 's/mainRouter.Use(compressionMiddleware)/\/\/mainRouter.Use(compress
 
 RUN go mod init github.com/d0rc/goproxy && go mod tidy
 
-RUN CGO_ENABLED=0 go build -o proxy src/goproxy.go
+RUN CGO_ENABLED=0 go build -o proxy src/goproxy.go -ldflags "-w -s"
 
 FROM scratch
 
